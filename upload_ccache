@@ -10,6 +10,20 @@ com ()
 
 time com ccache 1 # Compression level 1, its enough
 
-mkdir -p ~/.config/rclone
-echo "$rclone_config" > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
-time rclone copy ccache.tar.gz apon:ccache/ci2 -P # apon is my rclone config name (first line without [] of ~/.config/rclone/rclone.conf file from rclone setupped pc), ccache/ci2 is where ccache will be saved in my cloud, use yours one
+#tg
+tg(){
+	bot_api=$bot_api # Your tg bot api, dont use my one haha, it's better to encrypt bot api too.
+	your_telegram_id=$1 # No need to touch
+	msg=$2 # No need to touch
+	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
+}
+id=272503335 # Your telegram id
+tg $id "*juice ROM Compile Status*:
+*ccache uploading started at*:- \`$(date)\`."
+
+#mkdir -p ~/.config/rclone
+#echo "$rclone_config" > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
+time rclone copy ccache.tar.gz juice:ccache -P # apon is my rclone config name (first line without [] of ~/.config/rclone/rclone.conf file from rclone setupped pc), ccache/ci2 is where ccache will be saved in my cloud, use yours one
+
+tg $id "*juice ROM Compile Status*:
+*ccache uploaded at*:- \`$(date)\`."

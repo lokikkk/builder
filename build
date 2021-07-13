@@ -28,10 +28,10 @@ tg $id "*juice ROM Compile Status*: \`STARTED!\`.
 #make api-stubs-docs || echo no problem, we need ccache
 #make system-api-stubs-docs || echo no problem we need ccache
 #make test-api-stubs-docs || echo no problem, we need ccache
-make bacon -j8 & # dont remove that '&'
-sleep 90m
-kill %1
-ccache -s
+#make bacon -j8 & # dont remove that '&'
+#sleep 90m
+#kill %1
+#ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
 
 
@@ -42,9 +42,9 @@ ccache -s
 #}
 
 # It's recommended to use google drive(rclone) as upload solution for coping with the time limit. Un-comment next 3 lines to upload with rclone in drive. Also change apon and junk according to your config name, uploading folder of drive
-#up(){
-#	time rclone copy $1 juice:dotOS -P # juice is my rclone config name, 
-#}
+up(){
+	time rclone copy $1 juice:dotOS -P # juice is my rclone config name, 
+}
 
 
 mkdir -p ~/.config/rclone
@@ -57,13 +57,13 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #make system-api-stubs-docs || echo no problem
 #make test-api-stubs-docs || echo no problem
 
-#make bacon -j8 \
-#	&& send_zip=$(up out/target/product/juice/*zip) && tg $id "Build Succeed! $send_zip"
-#tg $id "*juice Compile Status*: \`FINISHED!\`
-#*Finished at*:- \`$(date)\`.
-#*Compile Time*: \`$((build_time / 3600)) hour(s), $((build_time % 3600 / 60)) minute(s) and $((build_time % 60)) seconds\`.
-#*Download Link*: [juice](https://rom.aseelpsathar-romdev.workers.dev/dotOS/)
-#*CCache Stats*:-
-#\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\` $send_zip"
+make bacon -j8 \
+	&& send_zip=$(up out/target/product/juice/*zip) && tg $id "Build Succeed! $send_zip"
+tg $id "*juice Compile Status*: \`FINISHED!\`
+*Finished at*:- \`$(date)\`.
+*Compile Time*: \`$((build_time / 3600)) hour(s), $((build_time % 3600 / 60)) minute(s) and $((build_time % 60)) seconds\`.
+*Download Link*: [juice](https://rom.aseelpsathar-romdev.workers.dev/dotOS/)
+*CCache Stats*:-
+\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 #	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id #"*juice ROM Compile Status*:\'Build Failed'" && tg $id "$send_shell" && ccache -s && sleep 2h
-#ccache -s # Let's print ccache statistics finally
+ccache -s # Let's print ccache statistics finally

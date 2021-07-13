@@ -29,8 +29,8 @@ repo init -q --no-repo-verify --depth=1 -u git://github.com/DotOS/manifest.git -
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8
 
 #device
-git clone --depth=1 https://github.com/aseelps/device_xiaomi_juice --single-branch -b test device/xiaomi/juice
+git clone --depth=1 https://github.com/aseelps/device_xiaomi_juice --single-branch -b rebase device/xiaomi/juice
 git clone --depth=1 https://github.com/aseelps/prebuilt-vendor_xiaomi_juice --single-branch -b dot11 vendor/xiaomi/juice
-git clone --depth=1 https://github.com/aseelps/android_kernel_xiaomi_juice  --single-branch -b 11.0 kernel/xiaomi/juice
+git clone --depth=1 https://github.com/aseelps/android_kernel_xiaomi_juice  --single-branch -b main kernel/xiaomi/juice
 git clone --depth=1 https://github.com/aseelps/prebuilts_clang_host_linux-x86_clang-r416183b1 --single-branch -b main prebuilts/clang/host/linux-x86/clang-juice
 
